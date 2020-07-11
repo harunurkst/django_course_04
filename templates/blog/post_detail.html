@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} post detail {% endblock %}
+
+{% block content %}
+<div class="col-md-8">
+    <div class="card">
+        <img src="{% if post.image %}{{ post.image.url }}{% endif %} " alt="" class="card-img-top">
+        <div class="card-body">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.description }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

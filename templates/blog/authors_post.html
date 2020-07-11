@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1><u>{{ name|capfirst }}'s Post</u></h1>
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.author }}</p>
+
+    <p>{{ post.description }}</p>
+<hr>
+{% endfor %}
+
+{% endblock %}
