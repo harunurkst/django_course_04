@@ -31,6 +31,7 @@ urlpatterns = [
     path('about', about, name='about-page'),
     path('student/', include('student.urls')),
     path('blog/', include('blog.urls')),
+    path('accounts/', include('account.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
