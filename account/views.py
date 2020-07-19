@@ -1,11 +1,31 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from .forms import UserLoginForm
 
 
+@login_required
 def dashboard(request):
+
     return render(request, 'accounts/dashboard.html')
+
+
+
+def user_signup(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/register.html', context)
 
 
 def user_login(request):

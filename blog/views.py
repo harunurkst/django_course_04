@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from .models import Post, Author
+from .forms import CreatePostForm
 
+
+def create_post(request):
+    forms = CreatePostForm()
+    context = {
+        'forms': forms
+    }
+    return render(request, 'blog/create_post.html', context)
 
 
 def author_list(request):
