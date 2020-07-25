@@ -13,7 +13,7 @@ def create_post(request):
 
 def author_list(request):
     authors = Author.objects.all()
-    return render(request, 'blog/author_list.html', {'authors':authors})
+    return render(request, 'blog/author_list.html', {'authors': authors})
 
 
 def authors_post(request, author_name):
