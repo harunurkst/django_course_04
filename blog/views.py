@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Post, Author
-from .forms import CreatePostForm
+from django.shortcuts import get_object_or_404, redirect
+from .models import Post, Author, Comment
+from .forms import CreatePostForm, CommentForm
 
 
 def create_post(request):
@@ -31,8 +32,19 @@ def post_list(request):
 
 
 def post_detail(request, slug):
-    post = Post.objects.get(slug=slug)
+    # post = Post.objects.get(slug=slug)
+    post = get_object_or_404(Post, slug=slug)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect(post)
+
     context = {
-        'post': post
+        'post': post,
+        'form': form
     }
     return render(request, 'blog/post_detail.html', context)

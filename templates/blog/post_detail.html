@@ -10,6 +10,26 @@
             <h1>{{ post.title }}</h1>
             <p>{{ post.description }}</p>
         </div>
+        <div class="card-footer">
+            <h1>{{ post.comments.all|length }} Comments</h1>
+
+            {% if post.comments %}
+                {% for comment in post.comments.all %}
+                    <p>{{ comment.name }}</p>
+                    <p>{{ comment.body }}</p>
+            <hr>
+                {% endfor %}
+
+            {% else %}
+            <p>No comments found !!</p>
+            {% endif %}
+            <h1>Leave a reply</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Post Comment" class="btn btn-success">
+            </form>
+        </div>
     </div>
 </div>
 
